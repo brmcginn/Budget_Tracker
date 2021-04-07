@@ -15,7 +15,7 @@ namespace Budget_Tracker
         public Guid ID { get; set; }
 
         [Required]
-        [StringLength(30, ErrorMessage = "Name too long")]
+        [StringLength(30, ErrorMessage = "Name should be less than 30 characters.")]
         public string Name { get; set; }
 
         [Required]
@@ -23,11 +23,11 @@ namespace Budget_Tracker
         public DateTime Date { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "Description too long")]
+        [StringLength(100, ErrorMessage = "Description must be shorter than 100 characters.")]
         public string Description { get; set; }
 
         [Required]
-        [Range(0, Double.MaxValue, ErrorMessage = "Amount must be greater than 0.")]
+        [Range(0, Double.MaxValue, ErrorMessage = "Amount must be postitive number.")]
         public double Amount { get; set; }
 
         [Required]

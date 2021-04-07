@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Budget_Tracker;
 using Budget_Tracker.Data;
+using Budget_Tracker.Models;
 
 namespace Budget_Tracker.Views
 {
@@ -25,7 +26,6 @@ namespace Budget_Tracker.Views
             var applicationDbContext = _context.Expenses.Include(e => e.BudgetCategory);
             return View(await applicationDbContext.ToListAsync());
         }
-
         // GET: Expenses/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
