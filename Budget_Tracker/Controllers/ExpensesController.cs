@@ -26,6 +26,16 @@ namespace Budget_Tracker.Views
             var applicationDbContext = _context.Expenses.Include(e => e.BudgetCategory);
             return View(await applicationDbContext.ToListAsync());
         }
+
+        public async Task<IActionResult> ExpensesCategoriesAndBudgets()
+        {
+            BudgetsAndExpensesVM vm = new BudgetsAndExpensesVM();
+            vm.expenses = _context.Expenses.ToList();
+            vm.budgetCategories = _context.BudgetCategories.ToList();
+            vm.budgets = _context.Budgets.ToList();
+            return View(vm);
+        }
+
         // GET: Expenses/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
