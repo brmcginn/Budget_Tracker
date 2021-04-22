@@ -38,7 +38,7 @@ namespace Budget_Tracker
             if (_db.Roles.Any(r => r.Name == SD.Admin)) return;
 
             _roleManager.CreateAsync(new IdentityRole(SD.Admin)).GetAwaiter().GetResult();
-            _roleManager.CreateAsync(new IdentityRole(SD.Manager)).GetAwaiter().GetResult();
+            _roleManager.CreateAsync(new IdentityRole(SD.User)).GetAwaiter().GetResult();
 
             _userManager.CreateAsync(new ApplicationUsers
             {
