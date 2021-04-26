@@ -35,33 +35,35 @@
     </thead>
     <tbody>
         @foreach (var item in Model)
-        {
 
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Amount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Recurring)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BudgetCategory.Name)
-                </td>
-                <td>
-                    <a class="btn btn-outline-info btn-sm" asp-action="Edit" asp-route-id="@item.ID">Edit <i class="far fa-edit"></i></a>
-                    <a class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.ID">Details <i class="far fa-file-alt"></i></a>
-                    <a class="btn btn-outline-info btn-sm" asp-action="Delete" asp-route-id="@item.ID">Delete <i class="far fa-trash-alt"></i></a>
-                </td>
-            </tr>
+        {
+            
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Recurring)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BudgetCategory.Name)
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-info btn-sm" asp-action="Edit" asp-route-id="@item.ID">Edit <i class="far fa-edit"></i></a>
+                        <a class="btn btn-outline-info btn-sm" asp-action="Details" asp-route-id="@item.ID">Details <i class="far fa-file-alt"></i></a>
+                        <a class="btn btn-outline-info btn-sm" asp-action="Delete" asp-route-id="@item.ID">Delete <i class="far fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            
         }
     </tbody>
 </table>
