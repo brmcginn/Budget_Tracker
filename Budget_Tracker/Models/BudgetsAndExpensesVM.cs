@@ -11,6 +11,5 @@ namespace Budget_Tracker.Models
         public List<BudgetCategories> budgetCategories { get; set; }
         public List<Budgets> budgets { get; set; }
         public List<Expenses> expenses { get; set; }
-        public List<UserBudgets> userBudgets { get; set; }
     }
 }

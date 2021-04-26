@@ -32,7 +32,7 @@ namespace Budget_Tracker
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<ApplicationUsers, IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders()
             .AddDefaultUI();
@@ -41,6 +41,8 @@ namespace Budget_Tracker
 
             services.AddScoped<IDbInitializer, DbInitializer>();
             services.AddControllersWithViews();
+
+            services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

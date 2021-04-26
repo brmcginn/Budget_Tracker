@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,6 +10,9 @@ namespace Budget_Tracker.Models
     public class Budgets
     {
         public Guid ID { get; set; }
+
+        [ForeignKey("ApplicationUsers")]
+        public string User { get; set; }
 
         [Required]
         [StringLength(30, ErrorMessage = "Name must be shorter than 30 characters")]
