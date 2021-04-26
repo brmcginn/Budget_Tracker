@@ -39,6 +39,5 @@ namespace Budget_Tracker
         [ForeignKey("BudgetCategoryID")]
         public BudgetCategories BudgetCategory { get; set; }
 
-
     }
 }
