@@ -37,7 +37,7 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Name)
+                        <a class="btn btn-outline-info btn-sm" asp-controller="BudgetCategories" asp-action="Report" asp-route-id="@item.ID"> @Html.DisplayFor(modelItem => item.Name)</a>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Amount)

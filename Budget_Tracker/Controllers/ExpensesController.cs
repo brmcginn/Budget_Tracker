@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Budget_Tracker;
 using Budget_Tracker.Data;
 using Budget_Tracker.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Budget_Tracker.Views
 {
@@ -20,6 +21,8 @@ namespace Budget_Tracker.Views
             _context = context;
         }
 
+
+        [Authorize(Roles = SD.User + "," + SD.Admin)]
         // GET: Expenses
         public async Task<IActionResult> Index()
         {
@@ -27,6 +30,7 @@ namespace Budget_Tracker.Views
             return View(await applicationDbContext.ToListAsync());
         }
 
+        [Authorize(Roles = SD.User + "," + SD.Admin)]
         public async Task<IActionResult> ExpensesCategoriesAndBudgets()
         {
             BudgetsAndExpensesVM vm = new BudgetsAndExpensesVM();

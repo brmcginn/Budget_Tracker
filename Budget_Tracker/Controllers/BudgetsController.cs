@@ -21,7 +21,7 @@ namespace Budget_Tracker.Views
             _context = context;
         }
 
-        //[Authorize(Roles = SD.User + "," + SD.Admin)]
+        [Authorize(Roles = SD.User + "," + SD.Admin)]
         // GET: Budgets
         public async Task<IActionResult> Index()
         {
@@ -201,9 +201,3 @@ namespace Budget_Tracker.Views
         }
     }
 }
-
-//BudgetsAndExpensesVM vm = new BudgetsAndExpensesVM();
-//vm.expenses = _context.Expenses.ToList();
-//vm.budgetCategories = _context.BudgetCategories.ToList();
-//vm.budgets = _context.Budgets.ToList();
-//return View(vm);

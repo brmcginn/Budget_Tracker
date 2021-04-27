@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Budget_Tracker.Data;
 using Budget_Tracker.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Budget_Tracker.Views
 {
@@ -19,6 +20,7 @@ namespace Budget_Tracker.Views
             _context = context;
         }
 
+        [Authorize(Roles = SD.User + "," + SD.Admin)]
         // GET: BudgetCategories
         public async Task<IActionResult> Index()
         {
