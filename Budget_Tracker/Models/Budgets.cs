@@ -18,10 +18,6 @@ namespace Budget_Tracker.Models
         [StringLength(30, ErrorMessage = "Name must be shorter than 30 characters")]
         public string Name { get; set; }
 
-        [ForeignKey("ApplicationUsers")]
-        public string User { get; set; }
-
-
         [Required]
         [Range(0, Double.MaxValue, ErrorMessage = "Amount must be positive number")]
         public double Amount { get; set; }
