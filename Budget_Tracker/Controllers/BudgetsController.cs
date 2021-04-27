@@ -21,7 +21,7 @@ namespace Budget_Tracker.Views
             _context = context;
         }
 
-        [Authorize(Roles = SD.User + "," + SD.Admin)]
+        //[Authorize(Roles = SD.User + "," + SD.Admin)]
         // GET: Budgets
         public async Task<IActionResult> Index()
         {
