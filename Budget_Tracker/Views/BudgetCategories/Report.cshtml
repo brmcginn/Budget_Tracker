@@ -3,11 +3,35 @@
 
 
 
-<h1>@Model.budgetCategories.ElementAt(0).Name</h1>
+<h1>Budget Category: @Model.budgetCategories.ElementAt(0).Name</h1>
+
+@{
+    double expensesTotal = 0;
 
 
+    @foreach (var item in Model.expenses)
+    {
+        expensesTotal += item.Amount;
+    }
 
-<h3>Expenses:</h3>
+    expensesTotal = Math.Round(expensesTotal, 2);
+
+    double surplus = Model.budgetCategories.ElementAt(0).Amount - expensesTotal;
+}
+
+<h5>Sum of expenses: $@expensesTotal</h5>
+<h5>Budget amount: $@Model.budgetCategories.ElementAt(0).Amount</h5>
+<h5>Sum of categories: $@expensesTotal</h5>
+
+@if (@surplus >= 0)
+{
+    <h5>Surplus: $@Math.Round(surplus, 2)</h5>
+}
+else
+{
+    <h5>Deficit: $@Math.Round(surplus, 2)</h5>
+}
+
 
 <p>
     <a class="btn btn-outline-info" asp-controller="Expenses" asp-action="Create">Create New <i class="far fa-plus-square"></i></a>
@@ -39,33 +63,33 @@
     <tbody>
         @foreach (var item in Model.expenses)
         {
-            
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Recurring)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BudgetCategory.Name)
-            </td>
-            <td>
-                <a class="btn btn-outline-info btn-sm" asp-controller="Expenses" asp-action="Edit" asp-route-id="@item.ID">Edit <i class="far fa-edit"></i></a>
-                <a class="btn btn-outline-info btn-sm" asp-controller="Expenses" asp-action="Details" asp-route-id="@item.ID">Details <i class="far fa-file-alt"></i></a>
-                <a class="btn btn-outline-info btn-sm" asp-controller="Expenses" asp-action="Delete" asp-route-id="@item.ID">Delete <i class="far fa-trash-alt"></i></a>
-            </td>
-        </tr>
-            
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Recurring)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BudgetCategory.Name)
+                </td>
+                <td>
+                    <a class="btn btn-outline-info btn-sm" asp-controller="Expenses" asp-action="Edit" asp-route-id="@item.ID">Edit <i class="far fa-edit"></i></a>
+                    <a class="btn btn-outline-info btn-sm" asp-controller="Expenses" asp-action="Details" asp-route-id="@item.ID">Details <i class="far fa-file-alt"></i></a>
+                    <a class="btn btn-outline-info btn-sm" asp-controller="Expenses" asp-action="Delete" asp-route-id="@item.ID">Delete <i class="far fa-trash-alt"></i></a>
+                </td>
+            </tr>
+
         }
     </tbody>
 </table>
