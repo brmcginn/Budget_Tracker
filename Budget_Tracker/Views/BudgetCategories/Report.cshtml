@@ -1,0 +1,81 @@
+﻿
+@model BudgetsAndExpensesVM
+
+
+
+<h1>@Model.budgetCategories.ElementAt(0).Name</h1>
+
+
+
+<h3>Expenses</h3>
+
+<p>
+    <a class="btn btn-outline-info" asp-controller="Expenses" asp-action="Create">Create New<i class="far fa-plus-square"></i></a>
+</p>
+<table class="table" id="budgetCatTable">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Amount
+            </th>
+            <th>
+                Recurring
+            </th>
+            <th>
+                Budget Category
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.expenses)
+        {
+            
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Recurring)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BudgetCategory.Name)
+            </td>
+            <td>
+                <a class="btn btn-outline-info btn-sm" asp-controller="Expenses" asp-action="Edit" asp-route-id="@item.ID">Edit <i class="far fa-edit"></i></a>
+                <a class="btn btn-outline-info btn-sm" asp-controller="Expenses" asp-action="Details" asp-route-id="@item.ID">Details <i class="far fa-file-alt"></i></a>
+                <a class="btn btn-outline-info btn-sm" asp-controller="Expenses" asp-action="Delete" asp-route-id="@item.ID">Delete <i class="far fa-trash-alt"></i></a>
+            </td>
+        </tr>
+            
+        }
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+        $('#budgetCatTable').DataTable();
+    });
+</script>
+
+
+
+
