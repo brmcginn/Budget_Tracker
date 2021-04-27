@@ -1,0 +1,36 @@
+﻿
+@model BudgetsAndExpensesVM
+
+<h1>Budget Ovrview</h1>
+
+@foreach (var item in Model.budgets)
+{
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </th>
+            </tr>
+
+        </thead>
+        @foreach (var unit in Model.budgetCategories)
+        {
+            if (item.ID == unit.BudgetID)
+            {
+                <tbody>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => unit.Name)
+                        </td>
+                    </tr>
+                </tbody>
+
+            }
+        }
+
+    </table>
+
+
+}
+

@@ -154,5 +154,31 @@ namespace Budget_Tracker.Views
         {
             return _context.Budgets.Any(e => e.ID == id);
         }
+
+        public async Task<IActionResult> Report(Guid? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            BudgetsAndExpensesVM vm = new BudgetsAndExpensesVM();
+            vm.expenses = _context.Expenses.ToList();
+            vm.budgetCategories = _context.BudgetCategories.ToList();
+            vm.budgets = _context.Budgets.ToList();
+
+            
+            if (vm.budgets == null)
+            {
+                return NotFound();
+            }
+
+            return View(vm);
+        }
     }
 }
+
+//BudgetsAndExpensesVM vm = new BudgetsAndExpensesVM();
+//vm.expenses = _context.Expenses.ToList();
+//vm.budgetCategories = _context.BudgetCategories.ToList();
+//vm.budgets = _context.Budgets.ToList();
+//return View(vm);
