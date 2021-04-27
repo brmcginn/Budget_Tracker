@@ -26,6 +26,8 @@
     <tbody>
         @foreach (var item in Model.expenses)
         {
+            if (item.User == User.Identity.Name || User.IsInRole(SD.Admin))
+            {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
@@ -43,6 +45,7 @@
                     @Html.DisplayFor(modelItem => item.Recurring)
                 </td>
             </tr>
+            }
         }
     </tbody>
 </table>
