@@ -39,8 +39,6 @@ namespace Budget_Tracker
 
             if (_db.Roles.Any(r => r.Name == SD.Admin)) return;
 
-            System.Diagnostics.Debug.WriteLine("Please actually work");
-
             _roleManager.CreateAsync(new IdentityRole(SD.Admin)).GetAwaiter().GetResult();
             _roleManager.CreateAsync(new IdentityRole(SD.User)).GetAwaiter().GetResult();
 
@@ -70,14 +68,14 @@ namespace Budget_Tracker
 
             _userManager.CreateAsync(new ApplicationUsers
             {
-                UserName = "aprodgers2@crimson.ua.edu",
-                Email = "aprodgers2@crimson.ua.edu",
+                UserName = "aprogers2@crimson.ua.edu",
+                Email = "aprogers2@crimson.ua.edu",
                 EmailConfirmed = true,
                 Name = "Alec"
 
             }, "BasicPassword123*").GetAwaiter().GetResult();
 
-            ApplicationUsers user2 = _db.ApplicationUsers.Where(u => u.Email == "aprodgers2@crimson.ua.edu").FirstOrDefault();
+            ApplicationUsers user2 = _db.ApplicationUsers.Where(u => u.Email == "aprogers2@crimson.ua.edu").FirstOrDefault();
             _userManager.AddToRoleAsync(user2, SD.User).GetAwaiter().GetResult();
 
             _userManager.CreateAsync(new ApplicationUsers

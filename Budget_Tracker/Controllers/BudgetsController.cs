@@ -56,7 +56,7 @@ namespace Budget_Tracker.Views
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Amount,Description,StartDate,EndDate")] Budgets budgets)
+        public async Task<IActionResult> Create([Bind("ID,User,Name,Amount,Description,StartDate,EndDate")] Budgets budgets)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace Budget_Tracker.Views
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("ID,Name,Amount,Description,StartDate,EndDate")] Budgets budgets)
+        public async Task<IActionResult> Edit(Guid id, [Bind("ID,User,Name,Amount,Description,StartDate,EndDate")] Budgets budgets)
         {
             if (id != budgets.ID)
             {
@@ -102,6 +102,7 @@ namespace Budget_Tracker.Views
                 try
                 {
                     _context.Update(budgets);
+                    budgets.User = HttpContext.User.Identity.Name;
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

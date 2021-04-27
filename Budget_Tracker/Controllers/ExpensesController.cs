@@ -71,7 +71,7 @@ namespace Budget_Tracker.Views
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Date,Description,Amount,Recurring,BudgetCategoryID")] Expenses expenses)
+        public async Task<IActionResult> Create([Bind("ID,User,Name,Date,Description,Amount,Recurring,BudgetCategoryID,BudgetCategory")] Expenses expenses)
         {
             if (ModelState.IsValid)
             {
@@ -107,7 +107,7 @@ namespace Budget_Tracker.Views
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("ID,Name,Date,Description,Amount,Recurring,BudgetCategoryID")] Expenses expenses)
+        public async Task<IActionResult> Edit(Guid id, [Bind("ID,User,Name,Date,Description,Amount,Recurring,BudgetCategoryID,BudgetCategory")] Expenses expenses)
         {
             if (id != expenses.ID)
             {
