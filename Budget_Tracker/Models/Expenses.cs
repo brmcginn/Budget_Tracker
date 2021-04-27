@@ -14,6 +14,9 @@ namespace Budget_Tracker
         [Required]
         public Guid ID { get; set; }
 
+        [ForeignKey("ApplicationUsers")]
+        public string User { get; set; }
+
         [Required]
         [StringLength(30, ErrorMessage = "Name should be less than 30 characters.")]
         public string Name { get; set; }

@@ -35,9 +35,10 @@
     </thead>
     <tbody>
         @foreach (var item in Model)
-
         {
-            
+
+            if (User.IsInRole(SD.Admin) || User.Identity.Name == item.User)
+
             {
                 <tr>
                     <td>
@@ -65,7 +66,6 @@
                     </td>
                 </tr>
             }
-
         }
     </tbody>
 </table>
