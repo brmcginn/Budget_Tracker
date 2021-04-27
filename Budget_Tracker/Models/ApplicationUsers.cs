@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Budget_Tracker
+namespace Budget_Tracker.Models
 {
     public class ApplicationUsers : IdentityUser
     {

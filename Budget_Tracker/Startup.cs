@@ -1,4 +1,5 @@
 using Budget_Tracker.Data;
+using Budget_Tracker.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -73,7 +74,7 @@ namespace Budget_Tracker
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Expenses}/{action=ExpensesCategoriesAndBudgets}/{id?}");
                 endpoints.MapRazorPages();
             });
         }
