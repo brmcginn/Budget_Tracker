@@ -19,6 +19,5 @@ namespace Budget_Tracker.Data
         public DbSet<BudgetCategories> BudgetCategories { get; set; }
         public DbSet<Budgets> Budgets { get; set; }
         public DbSet<ApplicationUsers> ApplicationUsers { get; set; }
-        public DbSet<UserBudgets> UserBudgets { get; set; }
     }
 }

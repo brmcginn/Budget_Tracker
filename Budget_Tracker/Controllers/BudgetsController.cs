@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Budget_Tracker.Data;
 using Budget_Tracker.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Budget_Tracker.Views
 {
@@ -59,6 +61,7 @@ namespace Budget_Tracker.Views
             if (ModelState.IsValid)
             {
                 budgets.ID = Guid.NewGuid();
+                budgets.User = HttpContext.User.Identity.Name;
                 _context.Add(budgets);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
