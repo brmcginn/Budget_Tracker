@@ -35,9 +35,9 @@
     </thead>
     <tbody>
         @foreach (var item in Model)
-
         {
-            
+            if (User.IsInRole(SD.Admin) || User.Identity.Name == item.User)
+            {
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.Name)
@@ -63,7 +63,7 @@
                         <a class="btn btn-outline-info btn-sm" asp-action="Delete" asp-route-id="@item.ID">Delete <i class="far fa-trash-alt"></i></a>
                     </td>
                 </tr>
-            
+            }
         }
     </tbody>
 </table>

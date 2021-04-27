@@ -72,6 +72,7 @@ namespace Budget_Tracker.Views
             if (ModelState.IsValid)
             {
                 expenses.ID = Guid.NewGuid();
+                expenses.User = HttpContext.User.Identity.Name;
                 _context.Add(expenses);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
