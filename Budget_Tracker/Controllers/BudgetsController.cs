@@ -36,8 +36,7 @@ namespace Budget_Tracker.Views
                 return NotFound();
             }
 
-            var budgets = await _context.Budgets
-                .FirstOrDefaultAsync(m => m.ID == id);
+            var budgets = await _context.Budgets.FirstOrDefaultAsync(m => m.ID == id);
             if (budgets == null)
             {
                 return NotFound();
@@ -166,13 +165,39 @@ namespace Budget_Tracker.Views
             vm.budgetCategories = _context.BudgetCategories.ToList();
             vm.budgets = _context.Budgets.ToList();
 
-            
-            if (vm.budgets == null)
+            BudgetsAndExpensesVM actualList = new BudgetsAndExpensesVM();
+
+            List<Budgets> actualBudget = new List<Budgets>();
+
+            foreach(var item in vm.budgets)
+            {
+                if(item.ID == id)
+                {
+                    actualBudget.Add(item);
+                }
+            }
+
+            List<BudgetCategories> actualBC = new List<BudgetCategories>();
+
+
+            foreach (var item in vm.budgetCategories)
+            {
+                if (item.BudgetID == id)
+                {
+                    actualBC.Add(item);
+                }
+            }
+
+            actualList.budgets = actualBudget;
+            actualList.budgetCategories = actualBC;
+
+
+            if (actualList == null)
             {
                 return NotFound();
             }
 
-            return View(vm);
+            return View (actualList);
         }
     }
 }

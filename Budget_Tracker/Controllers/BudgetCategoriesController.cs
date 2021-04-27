@@ -157,5 +157,10 @@ namespace Budget_Tracker.Views
         {
             return _context.BudgetCategories.Any(e => e.ID == id);
         }
+
+        public async Task<IActionResult> Report()
+        {
+            return View();
+        }
     }
 }
