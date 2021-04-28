@@ -12,6 +12,9 @@ namespace Budget_Tracker.Models
         [Required]
         public Guid ID { get; set; }
 
+        [ForeignKey("ApplicationUsers")]
+        public string User { get; set; }
+
         [Required]
         [StringLength(30, ErrorMessage = "Name must be shorter than 30 characters")]
         public string Name { get; set; }
@@ -24,6 +27,7 @@ namespace Budget_Tracker.Models
         public string Description { get; set; }
 
         [Required]
+        [Display(Name = "Budget")]
         public Guid BudgetID { get; set; }
 
         [ForeignKey("BudgetID")]

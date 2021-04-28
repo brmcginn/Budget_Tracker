@@ -50,7 +50,22 @@ namespace Budget_Tracker.Views
         // GET: BudgetCategories/Create
         public IActionResult Create()
         {
-            ViewData["BudgetID"] = new SelectList(_context.Budgets, "ID", "Name");
+            var fullList = _context.Budgets;
+            List<Budgets> userList = new List<Budgets>();
+
+            foreach (var item in fullList)
+            {
+                if (User.IsInRole(SD.Admin))
+                {
+                    userList.Add(item);
+                }
+                else if (item.User == HttpContext.User.Identity.Name)
+                {
+                    userList.Add(item);
+                }
+            }
+
+            ViewData["BudgetID"] = new SelectList(userList, "ID", "Name");
             return View();
         }
 
@@ -59,11 +74,12 @@ namespace Budget_Tracker.Views
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Amount,Description,BudgetID")] BudgetCategories budgetCategories)
+        public async Task<IActionResult> Create([Bind("ID,User,Name,Amount,Description,BudgetID")] BudgetCategories budgetCategories)
         {
             if (ModelState.IsValid)
             {
                 budgetCategories.ID = Guid.NewGuid();
+                budgetCategories.User = HttpContext.User.Identity.Name;
                 _context.Add(budgetCategories);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -85,7 +101,20 @@ namespace Budget_Tracker.Views
             {
                 return NotFound();
             }
-            ViewData["BudgetID"] = new SelectList(_context.Budgets, "ID", "Name", budgetCategories.BudgetID);
+            var fullList = _context.Budgets;
+            List<Budgets> userList = new List<Budgets>();
+            foreach (var item in fullList)
+            {
+                if (User.IsInRole(SD.Admin))
+                {
+                    userList.Add(item);
+                }
+                else if (item.User == HttpContext.User.Identity.Name)
+                {
+                    userList.Add(item);
+                }
+            }
+            ViewData["BudgetID"] = new SelectList(userList, "ID", "Name", budgetCategories.BudgetID);
             return View(budgetCategories);
         }
 
@@ -94,7 +123,7 @@ namespace Budget_Tracker.Views
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("ID,Name,Amount,Description,BudgetID")] BudgetCategories budgetCategories)
+        public async Task<IActionResult> Edit(Guid id, [Bind("ID,User,Name,Amount,Description,BudgetID")] BudgetCategories budgetCategories)
         {
             if (id != budgetCategories.ID)
             {
@@ -106,6 +135,7 @@ namespace Budget_Tracker.Views
                 try
                 {
                     _context.Update(budgetCategories);
+                    budgetCategories.User = HttpContext.User.Identity.Name;
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

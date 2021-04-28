@@ -37,6 +37,8 @@ namespace Budget_Tracker
         public bool Recurring { get; set; }
 
         [Required]
+        [Display(Name = "Budget Category")]
+
         public Guid BudgetCategoryID { get; set; }
 
         [ForeignKey("BudgetCategoryID")]
