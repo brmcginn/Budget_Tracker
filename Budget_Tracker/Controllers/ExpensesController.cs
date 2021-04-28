@@ -62,7 +62,22 @@ namespace Budget_Tracker.Views
         // GET: Expenses/Create
         public IActionResult Create()
         {
-            ViewData["BudgetCategoryID"] = new SelectList(_context.BudgetCategories, "ID", "Name");
+            var fullList = _context.BudgetCategories;
+            List<BudgetCategories> userList = new List<BudgetCategories>();
+            
+            foreach (var item in fullList)
+            {
+                if (User.IsInRole(SD.Admin))
+                {
+                    userList.Add(item);
+                }
+                else if (item.User == HttpContext.User.Identity.Name)
+                {
+                    userList.Add(item);
+                }
+            }
+
+            ViewData["BudgetCategoryID"] = new SelectList(userList, "ID", "Name");
             return View();
         }
 
@@ -98,7 +113,20 @@ namespace Budget_Tracker.Views
             {
                 return NotFound();
             }
-            ViewData["BudgetCategoryID"] = new SelectList(_context.BudgetCategories, "ID", "Name", expenses.BudgetCategoryID);
+            var fullList = _context.BudgetCategories;
+            List<BudgetCategories> userList = new List<BudgetCategories>();
+            foreach (var item in fullList)
+            {
+                if (User.IsInRole(SD.Admin))
+                {
+                    userList.Add(item);
+                }
+                else if (item.User == HttpContext.User.Identity.Name)
+                {
+                    userList.Add(item);
+                }
+            }
+            ViewData["BudgetCategoryID"] = new SelectList(fullList, "ID", "Name", expenses.BudgetCategoryID);
             return View(expenses);
         }
 
@@ -119,6 +147,7 @@ namespace Budget_Tracker.Views
                 try
                 {
                     _context.Update(expenses);
+                    expenses.User = HttpContext.User.Identity.Name;
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
